@@ -1,0 +1,46 @@
+/* PersonalInfoPage.css */
+.personal-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* background-color:SlateBlue; */
+  }
+  
+  .profile-photo {
+    margin-right: 20px;
+  }
+  
+  .profile-photo img {
+    width: 150px; /* Adjust as needed */
+    height: 150px; /* Adjust as needed */
+  }
+  
+  .personal-details {
+    display: flex;
+  }
+  
+  .column {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px; /* Adjust as needed for spacing between columns */
+  }
+  
+  .review-section,
+  .career-section {
+    margin-top: 20px;
+  }
+  
+  button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+}
+
+.primary-button{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
