@@ -30,21 +30,32 @@ function AppointmentForm() {
       let patientId = parseInt(sessionStorage["patientId"])
       console.log(patientId);
       
-      try{
-        axios.post(`${URL}/patient/checkUp/`+patientId+`/`+doctorId, body).then((response) => {
-            console.log(response);
-            console.log("booked appt");
-            navigate('/patient/home')
-        })
-        .catch() 
-        { 
-         //toast.warning('Wrong credential')
-        // navigate('/home')  
+      const today = new Date();
+      console.log(date)
+      let concateDate=today.getFullYear()+"-"+String(today.getMonth() + 1).padStart(2, '0')+"-"+String(today.getDate()).padStart(2, '0');
+      console.log(concateDate)
+      if(date<concateDate)
+      {
+        alert("please select valid date");
+      }else
+      {
+        try{
+          axios.post(`${URL}/patient/checkUp/`+patientId+`/`+doctorId, body).then((response) => {
+              console.log(response);
+              console.log("booked appt");
+              navigate('/patient/home')
+          })
+          .catch() 
+          { 
+           //toast.warning('Wrong credential')
+          // navigate('/home')  
+        }
+            
+        }catch(error){
+          console.error("something happened")
+        }
       }
-          
-      }catch(error){
-        console.error("something happened")
-      }
+      
 
     }
 
@@ -65,7 +76,9 @@ function AppointmentForm() {
     <div className="mb-3 w-50">
       <label for="date">Date</label>
       <input type="date" className="form-control" id="date" name="date"
-      onChange={(e) => setDate(e.target.value)}
+      onChange={(e) =>
+        setDate(e.target.value)
+      }
       />
     </div>
 

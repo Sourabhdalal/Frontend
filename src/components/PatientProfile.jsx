@@ -56,7 +56,7 @@ const PatientProfile = () => {
     setImage(file);
     const formData = new FormData();
     formData.append('image', file);
-
+    console.log(formData);
     try {
       axios.post(`${URL}/patient/image/upload/`+pid, formData).then((response) => {
           // const result = response.data
@@ -152,7 +152,7 @@ const PatientProfile = () => {
       </Modal.Footer>
     </Modal> */}
 
-<form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
     <input type="file" onChange={uploadImage} />
     </form>
     

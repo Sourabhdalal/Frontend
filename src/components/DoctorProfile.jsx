@@ -86,7 +86,7 @@ const DoctorProfile = () => {
         <div className="profile-photo">
         <img
           src={`${URL}/doctor/image/`+doctorData.doctorePhoto}
-          alt="Profile"
+          alt={default_profile}
           style={{ width: '100px', height: '100px',borderRadius:"50%",margin:"40px 20px",scale:"1.5" }}
         />
       </div>
