@@ -26,6 +26,7 @@ const DoctorDetail = () => {
   const location=useLocation()
   
   const did = location.state
+  const dcharges = location.state
   const navigate=useNavigate();
   useEffect(() => {
     const GetAllDoctor = async () => {
@@ -41,9 +42,9 @@ const DoctorDetail = () => {
   }, []);
 
   // Book Appointment function use navigate
-  const bookAppointment = (did, dname) => {
+  const bookAppointment = (did, dname, dcharges) => {
     // console.log(did);
-    navigate('/patient/appointmentform', {state:[did,dname]})
+    navigate('/patient/appointmentform', {state:[did,dname, dcharges]})
   }
   let appointment=()=>{}
 
@@ -53,7 +54,7 @@ const DoctorDetail = () => {
 
       <div className="profile-photo">
         <img
-          src={profile}
+          src={`${URL}/doctor/image/`+doctorData.doctorePhoto}
           alt="Profile"
           style={{ width: '100px', height: '100px',borderRadius:"50%",margin:"40px 20px",scale:"1.5" }}
         />
@@ -61,24 +62,23 @@ const DoctorDetail = () => {
       <div className="personal-details">
         <div className="column">
           <h2>{doctorData.doctorName}</h2>
-          <p>Email: {doctorData.doctorEmail}</p>
-          <p>Mobile: {doctorData.doctorPhoneNumber}</p>
-          
-            <h4>About:</h4>
-            <p>{personalInfo.about}</p>
+          <h2>{doctorData.doctorEmail}</h2>
+          <h2>{doctorData.doctorPhoneNumber}</h2>
+          <h2>{doctorData.doctorEducation}</h2>
+            
         </div>
         <div className="column">
-            <p>Review:{personalInfo.review}</p>
-          <p>Visiting Charges: 400 </p>
-          <p>Estimated Time: 45 mins</p>
-          
-            <h5>Career:</h5>
-            <p>{doctorData.doctorEducation}</p>
+        <h4>About:</h4>
+            <p>{personalInfo.about}</p>
+          <h4>Visiting Charges: {doctorData.doctorVisitingCharges}</h4>
+         
+            
+            
         </div>
       </div>
     </div>
     <div className='primary-button'>
-    <Button id="btn-1" variant="primary" onClick={appointment=()=> { bookAppointment(doctorData.doctorId, doctorData.doctorName)}}>Book Appointment</Button>
+    <Button id="btn-1" variant="primary" onClick={appointment=()=> { bookAppointment(doctorData.doctorId, doctorData.doctorName, doctorData.doctorVisitingCharges)}}>Book Appointment</Button>
     </div>
     </>
   );

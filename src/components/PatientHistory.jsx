@@ -34,11 +34,11 @@ const PatientHistory = () => {
       try{
         let did = doctorData
         console.log(did);
-        // const response = await axios.get(`${URL}/doctor/`+did);
-        // setDoctorData(response.data)
+        const response = await axios.get(`${URL}/doctor/`+did);
+        setDoctorData(response.data)
         // console.log(response.data)
       } catch (error) {
-        // console.error('Error fetching Doctor:', error);
+        console.error('Error fetching Doctor:', error);
       }
     }
     GetDoctorData();
@@ -86,10 +86,10 @@ const PatientHistory = () => {
           <td>{doctorData.doctorName}</td>
           <td>{patientHistory.date}</td>
           <td>{patientHistory.time}</td>
-          <td>{doctorData.doctorCharges}</td>
+          <td>{doctorData.doctorVistingCharges}</td>
           <td><Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
-        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-        Edit
+        
+        view prescription
       </Button> </td>
         </tr>
           

@@ -46,7 +46,7 @@ const PatientHomePage = () => {
     const homeopathyList=doctorList.filter(e=>(e.doctorCategory=="Homeopathy"))
     const allopathyList=doctorList.filter(e=>(e.doctorCategory=="Allopathy"))
     const ayurvedaList=doctorList.filter(e=>(e.doctorCategory=="Ayurveda"))
-    
+    console.log(allopathyList);
    let DoctorDetails =(did)=>{
     console.log(did);
     navigate("/patient/doctordetail" ,{state:did})
@@ -55,7 +55,7 @@ const PatientHomePage = () => {
     
 
   return (
-    <div className='mt-4'>
+    <div className='mt-4' style={{minHeight:"100vh"}}>
         <div className='d-flex justify-content-center'>
             <button className='custom-button' onClick={showAllopathy}>Allopathy</button>
             <button className='custom-button' onClick={showAyurveda}>Ayurveda</button>
@@ -64,11 +64,11 @@ const PatientHomePage = () => {
 
         {displayAllopathy && allopathyList && 
          <div className='d-flex'>
-            <p>Allopathy</p>
+            
             {allopathyList.map((a) => (
             <div className='d-flex'> 
             <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
-                <img className="card-img-top" src={a.doctorePhoto} alt="Card image cap" style={{width:"100%", height:"175px"}} />
+                <img className="card-img-top" src={`${URL}/doctor/image/`+a.doctorePhoto} alt="Card image cap" style={{width:"100%", height:"175px"}} />
                 <div className="card-body">
                     <h5 className="card-title">{a.doctorName}</h5>
                     <p className="card-text">{a.doctorEducation}</p>
@@ -83,11 +83,11 @@ const PatientHomePage = () => {
         
         {displayAyurveda && ayurvedaList && 
         <div className='d-flex'>
-            <p>Ayurveda</p>
+            
             {ayurvedaList.map((a) => (
             <div className='d-flex row'> 
             <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
-                <img className="card-img-top" src={a.doctorePhoto} alt="Card image cap" style={{width:"100%", height:"175px"}} />
+                <img className="card-img-top" src={`${URL}/doctor/image/`+a.doctorePhoto} alt="Card image cap" style={{width:"100%", height:"175px"}} />
                 <div className="card-body">
                     <h4>{a.doctorId}</h4>
                     <h5 className="card-title">{a.doctorName}</h5>
@@ -99,18 +99,21 @@ const PatientHomePage = () => {
             </div>))}
         </div>}
         
+        
         {displayHomeopathy && homeopathyList &&
         <div className='d-flex'>
          
             {homeopathyList.map((a) => (
-                    <div className="card m-4 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
+                <div className='d-flex row'>
+                    <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
                     <img className="card-img-top" src={default_profile} alt="Card image cap" style={{width:"65%", height:"145px"}} />
                     <div className="card-body">
                     <h5 className="card-title">{a.doctorName}</h5>
                     <p className="card-text">{a.doctorEducation}</p>
                     <btn className="btn btn-primary"
                         onClick={showDoctor = () => DoctorDetails(a.doctorId) }                    
-                    >Show Details</btn>
+                        >Show Details</btn>
+                    </div>
                 </div>
             </div>))}
 

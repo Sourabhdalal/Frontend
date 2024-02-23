@@ -11,6 +11,9 @@ const DoctorHistory = () => {
     let doctorId=sessionStorage["doctorId"]
     const [modalShow, setModalShow] = useState(false);
     const [doctorHistory, setDoctorHistory]=useState([])
+    const[patientData,setPatientData]=useState([])
+    let[patientId,setPatientId]=useState("")
+    
   
     const openModal = () => {}
 
@@ -28,16 +31,37 @@ const DoctorHistory = () => {
     GetDoctorHistory();
   }, []);
 
-  // doctorHistory.map((p) => {
-  //   console.log(p.patientName)
-  // })
-
-
+  console.log(doctorHistory);
+  // console.log(patientId);
   
+  useEffect(() => {
+    const GetPatientData = async () => {
+      try {
+        patientId=doctorHistory.map((p) => (p.patientId))
+        // let pid=patientId
+        console.log(patientId);
+        // const response = await axios.get(`${URL}/patient/`+patientId);
+        // setPatientData(response.data)
+        // console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching Doctor:', error);
+      }
+    };
+    GetPatientData();
+  }, []);
+
+
+  let truePrescription=doctorHistory.map(e => e.prescriptionStatus==true);
   return (
     <>
-    <div>
-      {doctorHistory.map((p) => {
+    <div style={{minHeight:"100vh"}}>
+      
+      {/* {doctorHistory.length==0 && 
+      <div style={{display:"flex", justifyContent:"center"}}>
+        <h2>No Appointment History</h2>
+      </div>
+      } */}
+      {truePrescription && doctorHistory.map((p) => {
         return(
         <table className="table table-hover table-bordered">
       <thead>
@@ -45,16 +69,16 @@ const DoctorHistory = () => {
           <th scope="col">Patient Name</th>
           <th scope="col">Patient Email</th>
           <th scope="col">Patient Address</th>
-          <th scope="col">Date</th>
+          <th scope="col">Date</th> 
           {/* <th scope="col">Status</th> */}
-        </tr>
+         </tr>
       </thead>
       <tbody>
           <tr>
           <td>{p.patientName}</td>
           <td>{p.patientEmail}</td>
           <td>{p.patientAddress}</td>
-          <td>{p.date}</td>
+          <td>{p.date}</td> 
           {/* <td><Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
         <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
         Edit

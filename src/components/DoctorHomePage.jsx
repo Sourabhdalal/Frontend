@@ -57,9 +57,12 @@ function DoctorHomePage() {
 
 
     return (
-    <div>
+    <div style={{minHeight:"100vh"}}>
       <div className='d-flex' style={{minHeight:"100%"}}>
-        {falsePatientsData.length ==0 && <div>nothingg</div>}
+        {falsePatientsData.length ==0 && <div style={{display:"flex", justifyContent:"center"}}>
+          <h2>No Patient Appointment
+          </h2>
+          </div>}
         {
         falsePatientsData.map(p=>{
           return (

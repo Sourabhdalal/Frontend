@@ -44,9 +44,9 @@ const DoctorAppointment = () => {
 console.log(doctorAppointment);
 
   let patientId=doctorAppointment.map((p)=>(p.patientId))
-  console.log(patientId);
-  const handlePrescription = () => {
+  // console.log(patientId);
 
+  const handlePrescription = () => {
     const body = {
       dieases:diseases,
       tablet
@@ -63,7 +63,12 @@ console.log(doctorAppointment);
   }
 
   return (
-    <div className='m-3'>
+    <div className='m-3' style={{minHeight:"100vh"}}>
+      {doctorAppointment.length ==0 && 
+      <div style={{display:"flex", justifyContent:"center"}}>
+        <h2>No Appointment schedule</h2>
+      </div>
+      }
       {doctorAppointment.map((d) => {
 
         return(
@@ -86,9 +91,16 @@ console.log(doctorAppointment);
           <td>{d.date}</td>
           <td>{d.time}</td>
           <td>
+            {d.prescriptionStatus == false && 
             <Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
             Prescription
             </Button>
+            }
+            {
+              d.prescriptionStatus==true && 
+              <h6>Prescription generated</h6>
+            }
+            
           </td>
         </tr>
       </tbody>

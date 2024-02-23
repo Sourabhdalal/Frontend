@@ -8,6 +8,7 @@ const PatientAppointment = () => {
   const[patientAppointment, setPatientAppointment]=useState([])
   const[patientsData, setPatientsData]=useState([])
   const[doctorIdState, setDoctorIdState]=useState("")
+  const[payment,setPayment]=useState(false)
 
 
   useEffect(() => {
@@ -40,13 +41,14 @@ const PatientAppointment = () => {
     GetDoctorData();
   }, [doctorIdState])
 
-  // console.log(patientAppointment);
+  console.log(patientAppointment);
 
   const handlePayment = () => {
     try {
       let did = doctorIdState
       console.log(did)
       axios.get(`${URL}/patient/paymentStatus/`+patientId+`/`+did).then((response)=>{
+        setPayment(true)
         toast.success("Payment done")
       }).catch() 
     } catch (e) {
@@ -54,10 +56,15 @@ const PatientAppointment = () => {
     }
   }
 
+  // console.log(patientAppointment);
   return (
     <>
+       <div style={{minHeight:"100vh"}}>
     {patientsData.map((p) => {
       return(
+
+        // <div>{p.patientName}</div>
+
       <div className='m-3'>
     {patientAppointment.doctorId!=null && p.status!=false &&
     <table className="table table-hover table-bordered">
@@ -78,12 +85,11 @@ const PatientAppointment = () => {
          <td>{patientAppointment.doctorName}</td>
           <td>{p.date}</td>
           <td>{p.time}</td>
-           <td>{patientAppointment.doctorCharges}</td>
+           <td>{patientAppointment.doctorVisitingCharges}</td>
            <td>
-            {patientAppointment.paymentStatus==true ? 
-            <p>Paid</p> : 
-            <input className='btn btn-primary' type="button" value="Pay" onClick={handlePayment}/>
-            } 
+             {patientAppointment.paymentStatus==true && <div>Paid</div>}
+            {patientAppointment.paymentStatus==false && <input className='btn btn-primary' type="button" value="Pay" onClick={handlePayment}/>}
+              
            </td>
          </tr>
       </tbody>
@@ -92,6 +98,7 @@ const PatientAppointment = () => {
   </div>
         )
       })}
+      </div>
     </>
 
      

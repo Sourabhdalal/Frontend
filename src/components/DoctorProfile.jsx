@@ -13,10 +13,7 @@ const DoctorProfile = () => {
   const[education, setEducation]=useState("")
   const[mobile, setMobile]=useState("")
   const[charges,setCharges]=useState("")
-  const[age,setAge]=useState("")
-  const[height,setHeight]=useState("")
-  const[weight,setWeight]=useState("")
-  const[bloodGroup,setBloodGroup]=useState("")
+
   const[image,setImage]=useState("")
   
   let dId = sessionStorage["doctorId"]
@@ -33,11 +30,6 @@ const DoctorProfile = () => {
     };
     GetAllDoctor();
   }, []);
-
-
-
- 
-
 
   const uploadImage = (event) => {
     const file=event.target.files[0];
@@ -56,6 +48,7 @@ const DoctorProfile = () => {
     }
   }
 
+
   const handleSubmit =(event)=>{
     event.preventDefault();
   }
@@ -68,10 +61,7 @@ const DoctorProfile = () => {
       doctorEducation: education,
       doctorPhoneNumber: mobile,
       doctorVisitingCharges:charges,
-      doctorAge:age,
-      doctorHeight:height,
-      doctorWeight:weight,
-      doctorBloodGroup:bloodGroup
+
     }
 
     console.log(body);
@@ -88,7 +78,7 @@ const DoctorProfile = () => {
 
 // console.log(patientData);
   return (
-    <div>
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
     <div class="container my-3">
       
        <div class="row align-items-center">
@@ -103,22 +93,22 @@ const DoctorProfile = () => {
         </div>
         <div class="col-4 sm-col-12">
           <h4>{doctorData.doctorName}</h4>
-          <p>Email:{doctorData.doctorEmail}</p>
-          <p>Mobile:{doctorData.doctorPhoneNumber}</p>
-          <p>Qualification:{doctorData.doctorEducation}</p>
-          <p>Charges:{doctorData.doctorVisitingCharges}</p>
+          <h4>{doctorData.doctorEmail}</h4>
+          <h4>{doctorData.doctorPhoneNumber}</h4>
+          <h4>{doctorData.doctorEducation}</h4>
+          <h4>{doctorData.doctorVisitingCharges}</h4>
         </div>
         <div class="col-5 sm-col-12">
-          <p>Age:{doctorData.doctorAge}</p>
-          <p>Height: {doctorData.doctorHeight}</p>
-          <p>Blood group: {doctorData.doctorBloodGroup}</p>
-          <p>Weight: {doctorData.doctorWeight}</p>
+        <h3>About</h3>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+          Magnam modi et voluptatum,
+           atque mollitia perspiciatis?</p>
           <p></p>
         </div>
       </div>
       
 
-      <Modal
+      {/* <Modal
       centered
       show={modalShow}
         onHide={() => setModalShow(false)}
@@ -211,7 +201,7 @@ const DoctorProfile = () => {
       </Modal.Body>
       <Modal.Footer>
       </Modal.Footer>
-    </Modal>
+    </Modal> */}
 
 
     <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -219,10 +209,10 @@ const DoctorProfile = () => {
     </form>
     
 
-    <Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
+    {/* <Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
         <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
         Edit
-      </Button> 
+      </Button>  */}
       
     </div>
     </div>

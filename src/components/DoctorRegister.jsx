@@ -18,6 +18,7 @@ const DoctorRegister = () => {
     const[phone,setPhone]=useState("")
     const[password,setPassword]=useState("")
     const[education,setEducation]=useState("")
+    const[charges,setCharges]=useState("")
     const[category, setCategory]=useState(getInitialCategory)
     const navigate=useNavigate();
 
@@ -43,13 +44,14 @@ const DoctorRegister = () => {
         else if(emailId.length==0 || name.length==0 || phone.length==0 || education.length==0 ){
           toast.warning("Please fill up all Details")
         }
+        
        /* else if((""+phone).length<10 || (""+phone).length>13 ){
           toast.warning("minimun number of digits should be 10 and maximum can be 13")
         }*/
         
         else{
           console.log(name,phone,emailId)
-              const body={doctorName:name,doctorEmail:emailId,doctorPhoneNumber:phone,password:password,doctorEducation:education,doctorCategory:category}
+              const body={doctorName:name,doctorEmail:emailId,doctorPhoneNumber:phone,password:password,doctorEducation:education,doctorCategory:category, doctorVisitingCharges:charges}
               try {
                 axios.post(`${URL}/doctor/`,body).then((response)=>{
                   console.log(response.data)
@@ -143,6 +145,22 @@ const DoctorRegister = () => {
                       pattern="^[A-Za-z\s]+$"
                       value={education}
                       onInput={(e) => setEducation(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="charges" className="form-label"><b>Charges</b></label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="charges"
+                      placeholder="0000"
+                      pattern="^\d{4}$"
+                      minLength={0}
+                      maxLength={5}
+                      value={charges}
+                      onInput={(e) => setCharges(e.target.value)}
                       required
                     />
                   </div>

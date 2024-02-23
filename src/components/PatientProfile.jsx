@@ -12,6 +12,7 @@ const PatientProfile = () => {
   const[email, setEmail]=useState("")
   const[address, setAddress]=useState("")
   const[mobile, setMobile]=useState("")
+  const[image,setImage]=useState("")
   
   let pid = sessionStorage["patientId"]
 
@@ -49,17 +50,28 @@ const PatientProfile = () => {
     }
   }
 
-  // const uploadPhoto = () => {
-  //   axios.post(`${URL}`).then((response) => {
-  //     console.log(response);
-  // })
-  // .catch() 
-  // { 
-   
-  // }
-  // }
+  const uploadImage = (event) => {
+    const file=event.target.files[0];
+    console.log(file);
+    setImage(file);
+    const formData = new FormData();
+    formData.append('image', file);
 
-// console.log(patientData);
+    try {
+      axios.post(`${URL}/patient/image/upload/`+pid, formData).then((response) => {
+          // const result = response.data
+          // console.log(response.data);
+      }).catch()
+    } catch (error) {
+      console.log("Error caught");
+    }
+  }
+
+  const handleSubmit =(event)=>{
+    event.preventDefault();
+  }
+
+  
   return (
     <div>
     <div class="container my-3">
@@ -68,7 +80,7 @@ const PatientProfile = () => {
         <div class="col-3">
         <div className="profile-photo">
         <img
-          src={default_profile}
+          src={`${URL}/patient/image/`+patientData.patientPhoto}
           alt="Profile"
           style={{ width: '100px', height: '100px',borderRadius:"50%",margin:"40px 20px",scale:"1.5" }}
         />
@@ -91,7 +103,7 @@ const PatientProfile = () => {
       </div>
       
 
-      <Modal
+      {/* <Modal
       centered
       show={modalShow}
         onHide={() => setModalShow(false)}
@@ -138,18 +150,17 @@ const PatientProfile = () => {
       </Modal.Body>
       <Modal.Footer>
       </Modal.Footer>
-    </Modal>
+    </Modal> */}
 
-      <label htmlFor="file">
-        Edit Photo
-        <input className='btn btn-primary' type="button" id="file"/>
-        </label> 
+<form onSubmit={handleSubmit} encType="multipart/form-data">
+    <input type="file" onChange={uploadImage} />
+    </form>
     
 
-    <Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
+    {/* <Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
         <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
         Edit
-      </Button> 
+      </Button>  */}
     </div>
     </div>
   )

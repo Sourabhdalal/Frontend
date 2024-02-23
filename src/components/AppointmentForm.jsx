@@ -7,13 +7,15 @@ import { URL } from '../config';
 function AppointmentForm() {
 
     const location=useLocation()
+    console.log(location);
     const doctorId=location.state[0]
     const doctorName=location.state[1]
+    const doctorCharges=location.state[2]
 
     const navigate=useNavigate()
 
     const[date, setDate]=useState(new Date().toLocaleDateString())
-    const[time, setTime]=useState("")
+    const[time, setTime]=useState("00:00")
     const[cough, setCough]=useState(false)
     const[cold, setCold]=useState(false)
     const[fever, setFever]=useState(false)
@@ -57,28 +59,25 @@ function AppointmentForm() {
     </div>
     <div className="mb-3 w-50">
       <label for="fee">Visting Fee:</label>
-      <input type="text" className="form-control" id="fee" name="fee" value="400" readonly />
+      <input type="text" className="form-control" id="fee" name="fee" value={doctorCharges} readonly />
     </div>
 
     <div className="mb-3 w-50">
       <label for="date">Date</label>
       <input type="date" className="form-control" id="date" name="date"
-      onInput={(date) => {
-        const dateString = new Date(date).toLocaleDateString()
-        console.log(dateString)
-      }}
+      onChange={(e) => setDate(e.target.value)}
       />
     </div>
 
     <div className="mb-3 w-50">
       <label for="time">Time</label>
       <input type="time" className="form-control" id="time" name="time" 
-      onInput={e => setTime(time)} />
+      onChange={e => setTime(e.target.value)} />
     </div>
    
     <div className="form-check mb-3 w-50">
         <input className="form-check-input" type="checkbox" name="Cough" value={cough} 
-        oncheck={e => setCough(!cough)} /> 
+        onChange={e => setCough(!cough)} /> 
       <label className="form-check-label"> Cough
       </label> 
       </div>
@@ -86,19 +85,19 @@ function AppointmentForm() {
       
       <div className="form-check mb-3">
         <input className="form-check-input" type="checkbox" name="Cold" value={cold}  
-        onCheck={e => setCold(!cold)} /> 
+        onChange={e => setCold(!cold)} /> 
        <label className="form-check-label"> Cold
       </label>
       </div>
       <div className="form-check mb-3">
         <input className="form-check-input" type="checkbox" name="Fever" value={fever} 
-        onCheck={e => setFever(!fever)} /> 
+        onChange={e => setFever(!fever)} /> 
        <label className="form-check-label"> Fever
       </label> 
       </div>
       <div className="form-check mb-3">
         <input className="form-check-input" type="checkbox" name="CheckUp" value={checkUp}
-        onCheck={e => setCheckUp(!checkUp)} /> 
+        onChange={e => setCheckUp(!checkUp)} /> 
        <label className="form-check-label"> check-up
       </label>
     </div>
