@@ -100,9 +100,7 @@ const DoctorProfile = () => {
         </div>
         <div class="col-5 sm-col-12">
         <h3>About</h3>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-          Magnam modi et voluptatum,
-           atque mollitia perspiciatis?</p>
+        <p>Graduated from YYCP University</p>
           <p></p>
         </div>
       </div>
