@@ -11,6 +11,7 @@ const PatientHistory = () => {
   const [modalShow, setModalShow] = useState(false);
   const[patientHistory, setPatientHistory]=useState([])
   const[doctorData, setDoctorData]=useState([])
+  const[getPrescription, setGetPrescription]=useState([])
   const openModal = () => {}
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const PatientHistory = () => {
     GetPatientHistory();
   }, []);
 
-  // console.log(typeof(doctorData));
+  // console.log(doctorData);
 
   useEffect(() => {
     const GetDoctorData = async() => {
@@ -44,12 +45,27 @@ const PatientHistory = () => {
     GetDoctorData();
   }, [doctorData])
 
+  useEffect(() => {
+    const GetPrescription = async() => {
+      try{
+        let did = doctorData.doctorId
+        console.log(did);
+        const response = await axios.get(`${URL}/prescription/get/`+did+`/`+patientId);
+        setGetPrescription(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching Doctor:', error);
+      }
+    }
+    GetPrescription();
+  }, [doctorData])
+
   return (
-    <div>
+    <div style={{minHeight:"100vh"}}>
        <table className="table table-hover table-bordered">
       <thead>
         <tr>
-          <th scope="col">Doctor id</th>
+          <th scope="col">Doctor email</th>
           <th scope="col">Doctor Name</th>
           <th scope="col">Date</th>
           <th scope="col">Time</th>
@@ -59,34 +75,32 @@ const PatientHistory = () => {
       </thead>
       <tbody>
           <tr>
-          <td>23</td>
-          <td>abcd</td>
+          <td>raj@gmail.com</td>
+          <td>raj</td>
           <td>2024-02-19</td>
           <td>13:40</td>
           <td>400</td>
           <td><Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
-        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-        Edit
+        view prescription
       </Button> </td>
         </tr>
         <tr>
-          <td>24</td>
-          <td>defg</td>
+          <td>yash@gmail.com</td>
+          <td>yash</td>
           <td>2034-02-20</td>
           <td>03:30</td>
           <td>500</td>
           <td><Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
-        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-        Edit
+            view prescription
       </Button> </td>
         </tr>
 
         <tr>
-          <td>{doctorData.doctorId}</td>
+          <td>{doctorData.doctorEmail}</td>
           <td>{doctorData.doctorName}</td>
           <td>{patientHistory.date}</td>
           <td>{patientHistory.time}</td>
-          <td>{doctorData.doctorVistingCharges}</td>
+          <td>{doctorData.doctorVisitingCharges}</td>
           <td><Button className='mx-3' variant="primary" onClick={() => setModalShow(true)}>
         
         view prescription
@@ -102,13 +116,16 @@ const PatientHistory = () => {
         onHide={() => setModalShow(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>View Prescription</Modal.Title>
       </Modal.Header>
       <Modal.Body>
       <div>
-          <p>
-            abcd
-          </p>
+          <div>
+            <h3>Diseases: {getPrescription.dieases}</h3>
+            </div>
+            <div>
+            <h3>Tablet: {getPrescription.tablet}</h3>
+          </div>
       </div>
       </Modal.Body>
       <Modal.Footer>

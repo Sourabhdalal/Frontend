@@ -68,7 +68,7 @@ function DoctorHomePage() {
           return (
             <>
               <div class="card m-5 p-3" style={{width:"18rem", borderRadius:"15px"}}>
-                <img src={`${URL}/patient/image/`+p.patientPhoto} class="card-img-top" alt={default_profile} />
+                <img src={p.patientPhoto==null ? default_profile : `${URL}/patient/image/`+p.patientPhoto} class="card-img-top" />
                 <div class="card-body">
                 <h5 class="card-title">{p.patientName} </h5>
                 <p class="card-text">{p.patientAddress}</p>

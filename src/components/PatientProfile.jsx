@@ -80,7 +80,7 @@ const PatientProfile = () => {
         <div class="col-3">
         <div className="profile-photo">
         <img
-          src={`${URL}/patient/image/`+patientData.patientPhoto}
+          src={patientData.patientPhoto==null ? default_profile : `${URL}/patient/image/`+patientData.patientPhoto}
           alt="Profile"
           style={{ width: '100px', height: '100px',borderRadius:"50%",margin:"40px 20px",scale:"1.5" }}
         />

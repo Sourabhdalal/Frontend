@@ -66,9 +66,9 @@ const PatientHomePage = () => {
          <div className='d-flex'>
             
             {allopathyList.map((a) => (
-            <div className='d-flex'> 
-            <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
-                <img className="card-img-top" src={`${URL}/doctor/image/`+a.doctorePhoto} alt={default_profile} style={{width:"100%", height:"175px"}} />
+            <div className='d-flex row'> 
+            <div className="card m-5 p-2"  style={{width:"20rem", height:"340px", borderRadius:"10px"}}>
+                <img className="card-img-top" src={a.doctorePhoto==null ? default_profile : `${URL}/doctor/image/`+a.doctorePhoto} style={{width:"100%", height:"175px"}} />
                 <div className="card-body">
                     <h5 className="card-title">{a.doctorName}</h5>
                     <p className="card-text">{a.doctorEducation}</p>
@@ -86,8 +86,8 @@ const PatientHomePage = () => {
             
             {ayurvedaList.map((a) => (
             <div className='d-flex row'> 
-            <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
-                <img className="card-img-top" src={`${URL}/doctor/image/`+a.doctorePhoto} alt={default_profile} style={{width:"100%", height:"175px"}} />
+            <div className="card m-5 p-2"  style={{width:"20rem", height:"340px", borderRadius:"10px"}}>
+                <img className="card-img-top" src={a.doctorePhoto==null ? default_profile : `${URL}/doctor/image/`+a.doctorePhoto} style={{width:"100%", height:"175px"}} />
                 <div className="card-body">
                     <h4>{a.doctorId}</h4>
                     <h5 className="card-title">{a.doctorName}</h5>
@@ -105,8 +105,8 @@ const PatientHomePage = () => {
          
             {homeopathyList.map((a) => (
                 <div className='d-flex row'>
-                    <div className="card m-5 p-2"  style={{width:"20rem", height:"300px", borderRadius:"10px"}}>
-                    <img className="card-img-top" src={`${URL}/doctor/image/`+a.doctorePhoto} alt={default_profile} style={{width:"65%", height:"145px"}} />
+                    <div className="card m-5 p-2"  style={{width:"20rem", height:"340px", borderRadius:"10px"}}>
+                    <img className="card-img-top" src={a.doctorePhoto==null ? default_profile : `${URL}/doctor/image/`+a.doctorePhoto} style={{width:"100%", height:"175px"}} />
                     <div className="card-body">
                     <h5 className="card-title">{a.doctorName}</h5>
                     <p className="card-text">{a.doctorEducation}</p>
